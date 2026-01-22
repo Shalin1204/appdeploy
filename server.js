@@ -18,12 +18,16 @@ const pool = new Pool({
 if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL not set");
 }
+//railway ke liye imp//
+app.get("/", (req, res) => {
+  res.status(200).send("OK");
+});
 
 
 // ✅ Test DB connection
-pool.connect()
+pool.query("SELECT 1")
   .then(() => console.log("✅ Connected to Railway PostgreSQL"))
-  .catch(err => console.error("❌ Connection error:", err.stack));
+  .catch(err => console.error("❌ DB error:", err));
 
 // Example API route to test data
 app.get("/admin", async (req, res) => {
