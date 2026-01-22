@@ -11,11 +11,14 @@ app.use(bodyParser.json());
 
 // ✅ Railway PostgreSQL connection
 const pool = new Pool({
-  connectionString: "postgresql://postgres:OsieWRhOsIkMLYVORayEsvMpvptQSqnd@yamanote.proxy.rlwy.net:57585/railway",
-  ssl: {
-    rejectUnauthorized: false // required for Railway’s SSL
-  }
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
 });
+
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL not set");
+}
+
 
 // ✅ Test DB connection
 pool.connect()
