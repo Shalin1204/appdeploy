@@ -1,0 +1,9 @@
+{
+  "services": [
+    {
+      "name": "appdeploy",
+      "startCommand": "node server.js",
+      "port": 8080
+    }
+  ]
+}
